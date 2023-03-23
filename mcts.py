@@ -1,6 +1,6 @@
 import math
 import random
-from functions import is_valid_move, check_win, process_state
+from functions import is_valid_move, is_win, process_state
 def getFloor(node):
     res = 0
     while(node.parent):
@@ -18,9 +18,9 @@ def random_valid_step(block, list_step):
         if len(valid_steps) == 0: return None
         return random.choice(valid_steps)
     else:
-        steps = [block.split_move_up(), block.split_move_right(), block.split_move_down(),
-                block.split_move_left(), block.split_move_up_other(), block.split_move_right_other(),
-                block.split_move_down_other(), block.split_move_left_other()]
+        steps = [block.S1_move_up(), block.S1_move_right(), block.S1_move_down(),
+                block.S1_move_left(), block.S2_move_up(), block.S2_move_right(),
+                block.S2_move_down(), block.S2_move_left()]
         valid_steps = []
         
         for step in steps:
@@ -64,23 +64,23 @@ class Node:
             if is_valid_move(self.current.move_left()) and not Node(self.current.move_left(), self).is_existed():
                 self.childs.append(Node(self.current.move_left(), self))
         else:
-            if is_valid_move(self.current.split_move_up()) and not Node(self.current.split_move_up(), self).is_existed():
-                self.childs.append(Node(self.current.split_move_up(), self))
-            if is_valid_move(self.current.split_move_right()) and not Node(self.current.split_move_right(), self).is_existed():
-                self.childs.append(Node(self.current.split_move_right(), self))
-            if is_valid_move(self.current.split_move_down()) and not Node(self.current.split_move_down(), self).is_existed():
-                self.childs.append(Node(self.current.split_move_down(), self))
-            if is_valid_move(self.current.split_move_left()) and not Node(self.current.split_move_left(), self).is_existed():
-                self.childs.append(Node(self.current.split_move_left(), self))
+            if is_valid_move(self.current.S1_move_up()) and not Node(self.current.S1_move_up(), self).is_existed():
+                self.childs.append(Node(self.current.S1_move_up(), self))
+            if is_valid_move(self.current.S1_move_right()) and not Node(self.current.S1_move_right(), self).is_existed():
+                self.childs.append(Node(self.current.S1_move_right(), self))
+            if is_valid_move(self.current.S1_move_down()) and not Node(self.current.S1_move_down(), self).is_existed():
+                self.childs.append(Node(self.current.S1_move_down(), self))
+            if is_valid_move(self.current.S1_move_left()) and not Node(self.current.S1_move_left(), self).is_existed():
+                self.childs.append(Node(self.current.S1_move_left(), self))
 
-            if is_valid_move(self.current.split_move_up_other()) and not Node(self.current.split_move_up_other(), self).is_existed():
-                self.childs.append(Node(self.current.split_move_up_other(), self))
-            if is_valid_move(self.current.split_move_right_other()) and not Node(self.current.split_move_right_other(), self).is_existed():
-                self.childs.append(Node(self.current.split_move_right_other(), self))
-            if is_valid_move(self.current.split_move_down_other()) and not Node(self.current.split_move_down_other(), self).is_existed():
-                self.childs.append(Node(self.current.split_move_down_other(), self))
-            if is_valid_move(self.current.split_move_left_other()) and not Node(self.current.split_move_left_other(), self).is_existed():
-                self.childs.append(Node(self.current.split_move_left_other(), self))
+            if is_valid_move(self.current.S2_move_up()) and not Node(self.current.S2_move_up(), self).is_existed():
+                self.childs.append(Node(self.current.S2_move_up(), self))
+            if is_valid_move(self.current.S2_move_right()) and not Node(self.current.S2_move_right(), self).is_existed():
+                self.childs.append(Node(self.current.S2_move_right(), self))
+            if is_valid_move(self.current.S2_move_down()) and not Node(self.current.S2_move_down(), self).is_existed():
+                self.childs.append(Node(self.current.S2_move_down(), self))
+            if is_valid_move(self.current.S2_move_left()) and not Node(self.current.S2_move_left(), self).is_existed():
+                self.childs.append(Node(self.current.S2_move_left(), self))
 
     def propagate(self, is_win):
         self.games += 1
@@ -95,7 +95,7 @@ class Node:
     #     while iterator:
     #         iterator -= 1
     #         step = random_valid_step(step)
-    #         if check_win(step):
+    #         if is_win(step):
     #             return True
     #     return False
 
@@ -120,7 +120,7 @@ class Node:
                 return False
 
             list_step.append(step)
-            if check_win(step):
+            if is_win(step):
                 print('winwinwinwinwinwinwinwinwinwinwinwinwinwinwinwin')
                 return True
         print('lose')
@@ -184,7 +184,7 @@ def monte_carlo_tree_search(block):
         if (node is None): continue
         process_state(node.current)
         print(getFloor(node))
-        if check_win(node.current):
+        if is_win(node.current):
             print(node.current.x, node.current.y)
             return get_solution(node)
         is_win = node.simulate()

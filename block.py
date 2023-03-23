@@ -86,14 +86,14 @@ class Block:
 
         return new_block
 
-    def split_move_up(self):
+    def S1_move_up(self):
         game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
                           self.x_split, self.y_split, id=game_setup.block_id)
         new_block.y -= 1
         return new_block
 
-    def split_move_right(self):
+    def S1_move_right(self):
         game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
                           self.x_split, self.y_split, id=game_setup.block_id)
@@ -101,7 +101,7 @@ class Block:
 
         return new_block
 
-    def split_move_left(self):
+    def S1_move_left(self):
         game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
                           self.x_split, self.y_split, id=game_setup.block_id)
@@ -109,7 +109,7 @@ class Block:
 
         return new_block
 
-    def split_move_down(self):
+    def S1_move_down(self):
         game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
                           self.x_split, self.y_split, id=game_setup.block_id)
@@ -118,7 +118,7 @@ class Block:
         return new_block
 
     # split other
-    def split_move_up_other(self):
+    def S2_move_up(self):
         game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
                           self.x_split, self.y_split, id=game_setup.block_id)
@@ -126,7 +126,7 @@ class Block:
 
         return new_block
 
-    def split_move_right_other(self):
+    def S2_move_right(self):
         game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
                           self.x_split, self.y_split, id=game_setup.block_id)
@@ -134,7 +134,7 @@ class Block:
 
         return new_block
 
-    def split_move_left_other(self):
+    def S2_move_left(self):
         game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
                           self.x_split, self.y_split, id=game_setup.block_id)
@@ -142,7 +142,7 @@ class Block:
 
         return new_block
 
-    def split_move_down_other(self):
+    def S2_move_down(self):
         game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
                           self.x_split, self.y_split, id=game_setup.block_id)

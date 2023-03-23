@@ -178,7 +178,7 @@ def is_visited(block):
     return False
 
 
-def check_win(block):
+def is_win(block):
     x = block.x
     y = block.y
     status = block.status
@@ -299,7 +299,7 @@ def add_move_fitness(block):
 #         else:
 #             cnt = add_move_ga(valid_dna_s, cnt, valid_dna_s[cnt].move_left())
 #     for valid_dna in valid_dna_s:
-#         if check_win(valid_dna):
+#         if is_win(valid_dna):
 #             return True
 #     return False
 
@@ -331,6 +331,6 @@ def ga_solution_reprocess(solution, block):
                 res.append(block)
             else:
                 block = block.move_right()
-        if check_win(block):
+        if is_win(block):
             break
     return res

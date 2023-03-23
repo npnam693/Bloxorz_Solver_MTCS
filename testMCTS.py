@@ -1,6 +1,6 @@
 import math
 import random
-from functions import check_win, process_state
+from functions import is_win, process_state
 def check_existed_block(block, listBlock):
     if block.status != "SPLIT":
         for i in listBlock:
@@ -19,10 +19,10 @@ def random_action_valid(block, listBlock):
         if block.status != 'SPLIT':
             actions = [block.move_up(), block.move_right(), block.move_down(), block.move_left()]
         else:
-            actions = [block.split_move_up(), block.split_move_right(),
-                    block.split_move_down(), block.split_move_left(), 
-                    block.split_move_up_other(), block.split_move_right_other(),
-                    block.split_move_down_other(), block.split_move_left_other()]
+            actions = [block.S1_move_up(), block.S1_move_right(),
+                    block.S1_move_down(), block.S1_move_left(), 
+                    block.S2_move_up(), block.S2_move_right(),
+                    block.S2_move_down(), block.S2_move_left()]
         
         for action in actions:
             if process_state(action):
@@ -66,10 +66,10 @@ class Node:
         if self.block.status != 'SPLIT':
             actions = [self.block.move_up(), self.block.move_right(), self.block.move_down(), self.block.move_left()]
         else:
-            actions = [self.block.split_move_up(), self.block.split_move_right(),
-                    self.block.split_move_down(), self.block.split_move_left(), 
-                    self.block.split_move_up_other(), self.block.split_move_right_other(),
-                    self.block.split_move_down_other(), self.block.split_move_left_other()
+            actions = [self.block.S1_move_up(), self.block.S1_move_right(),
+                    self.block.S1_move_down(), self.block.S1_move_left(), 
+                    self.block.S2_move_up(), self.block.S2_move_right(),
+                    self.block.S2_move_down(), self.block.S2_move_left()
                     ]
         for action in actions:
             newChild = self.gen_child(action, self)
@@ -111,7 +111,7 @@ class Node:
             if block is None: 
                 return False
             listBlock.append(block)
-            if check_win(block):
+            if is_win(block):
                 print('winwinwinwinwinwinwinwinwinwinwinwinwinwinwinwin')
                 return True
         return False
@@ -140,7 +140,7 @@ def monte_carlo_tree_search_new(block):
         iterator += 1
         node = root_node.select_child()
         if (node is None): continue
-        if check_win(node.block):
+        if is_win(node.block):
             return get_solution(node)
         is_win = node.simulate()
         node.propagate(is_win)

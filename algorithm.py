@@ -1,32 +1,32 @@
 import game_setup
-from functions import check_win, action, get_solution
+from functions import is_win, action, get_solution
 
 def BFS(block):
     game_setup.previous = [block]  
     queue = [block]
     solution = []
     while queue:
-        
-        current = queue.pop(0)
-        if check_win(current):
-            print("Success! Found solution after", current.id, "steps:")
-            solution = get_solution(current)
+        currentState = queue.pop(0)
+
+        if is_win(currentState):
+            print("Success! Found solution after", currentState.id, "steps:")
+            solution = get_solution(currentState)
             break
 
-        if current.status != "SPLIT":
-            action(queue, current.move_up())
-            action(queue, current.move_right())
-            action(queue, current.move_down())
-            action(queue, current.move_left())
+        if currentState.status != "SPLIT":
+            action(queue, currentState.move_up())
+            action(queue, currentState.move_down())
+            action(queue, currentState.move_left())
+            action(queue, currentState.move_right())
         else:
-            action(queue, current.split_move_up())
-            action(queue, current.split_move_right())
-            action(queue, current.split_move_down())
-            action(queue, current.split_move_left())
+            action(queue, currentState.S1_move_up())
+            action(queue, currentState.S1_move_down())
+            action(queue, currentState.S1_move_left())
+            action(queue, currentState.S1_move_right())
 
-            action(queue, current.split_move_up_other())
-            action(queue, current.split_move_right_other())
-            action(queue, current.split_move_down_other())
-            action(queue, current.split_move_left_other())
+            action(queue, currentState.S2_move_up())
+            action(queue, currentState.S2_move_down())
+            action(queue, currentState.S2_move_left())
+            action(queue, currentState.S2_move_right())
     return solution
 
