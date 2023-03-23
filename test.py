@@ -1,7 +1,7 @@
 import game_setup
 from read_level_input import read_file
 from block import Block
-from algorithm import BFS
+from BFS_algorithm import BFS
 import time
 
 
