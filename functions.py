@@ -1,20 +1,20 @@
-import global_variables
+import game_setup
 
 
-def add_move(queue, block):
+def action(queue, block):
     if process_state(block):
         if is_visited(block):
             return None
         else:
             queue.append(block)
-            global_variables.previous.append(block)
+            game_setup.previous.append(block)
             return True
     return False
 
 
 def sort_switch(block, x, y):
     game_map = block.game_map
-    for obj in global_variables.objects:
+    for obj in game_setup.objects:
         if (x, y) == (obj["position"][0], obj["position"][1]):  # find object by position
             if obj["switch"] != "sort_switch":  # for debugging
                 print("sort_switch wrong type !!!")
@@ -39,7 +39,7 @@ def sort_switch(block, x, y):
 
 
 def hard_switch(block, x, y):
-    for obj in global_variables.objects:
+    for obj in game_setup.objects:
         if (x, y) == (obj["position"][0], obj["position"][1]):  # find object by position
             if obj["switch"] != "hard_switch":  # for debugging
                 print("sort_switch wrong type !!!")
@@ -64,7 +64,7 @@ def hard_switch(block, x, y):
 
 
 def teleport_switch(block, x, y):
-    for obj in global_variables.objects:
+    for obj in game_setup.objects:
         if (x, y) == (obj["position"][0], obj["position"][1]):  # find object by position
             if obj["switch"] != "teleport_switch":  # for debugging
                 print("teleport_switch wrong type !!!")
@@ -136,12 +136,12 @@ def is_valid_move(block):
     status = block.status
     game_map = block.game_map
     # guard: not out of the board
-    if x < 0 or y < 0 or x >= global_variables.col or y >= global_variables.row:
+    if x < 0 or y < 0 or x >= game_setup.col or y >= game_setup.row:
         return False
     else:
         if x_split is not None and y_split is not None:
-            if x_split < 0 or y_split < 0 or x_split >= global_variables.col \
-                    or y_split >= global_variables.row or game_map[y_split][x_split] == ".":
+            if x_split < 0 or y_split < 0 or x_split >= game_setup.col \
+                    or y_split >= game_setup.row or game_map[y_split][x_split] == ".":
                 return False
 
     if game_map[y][x] == ".":
@@ -150,12 +150,12 @@ def is_valid_move(block):
         if game_map[y][x] == "=":  # can not stand on sort ground
             return False
     if status == "LIE_VERTICAL":
-        if y >= global_variables.row - 1:
+        if y >= game_setup.row - 1:
             return False
         if game_map[y+1][x] == '.':
             return False
     if status == "LIE_HORIZONTAL":
-        if x >= global_variables.col - 1:
+        if x >= game_setup.col - 1:
             return False
         if game_map[y][x+1] == '.':
             return False
@@ -165,12 +165,12 @@ def is_valid_move(block):
 
 def is_visited(block):
     if block.status != "SPLIT":
-        for i in global_variables.previous:
+        for i in game_setup.previous:
             if i.x == block.x and i.y == block.y \
                     and i.status == block.status and i.game_map == block.game_map:
                 return True
     else:
-        for i in global_variables.previous:
+        for i in game_setup.previous:
             if i.x == block.x and i.y == block.y \
                     and i.x_split == block.x_split and i.y_split == block.y_split \
                     and i.status == block.status and i.game_map == block.game_map:
@@ -225,7 +225,7 @@ def view_2d_solution(block):
             print("")
 
 
-def solution_path(block):
+def get_solution(block):
     solution = [block]
     temp = block.prev
     while temp is not None:
@@ -286,7 +286,7 @@ def add_move_fitness(block):
 
 
 # def check_win_dna(dna, block):
-#     global_variables.previous = []
+#     game_setup.previous = []
 #     valid_dna_s = [block]
 #     cnt = 0
 #     for gene in dna.genes:

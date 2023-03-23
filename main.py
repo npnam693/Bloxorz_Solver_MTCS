@@ -1,7 +1,7 @@
 from block import Block
-from algorithm import BFS, genetic_algorithm
+from algorithm import BFS
 from read_level_input import read_file
-import global_variables
+import game_setup
 from test import test
 from draw import draw_pygame, draw_raw_solution
 # from mcts import monte_carlo_tree_search
@@ -9,25 +9,25 @@ from testMCTS import monte_carlo_tree_search_new
 import time
 
 def main():
-    global_variables.init()
+    game_setup.init()
     print("\nChoose mode:")
-    global_variables.is_test = int(input("1. Test all levels\n2. Step by step demo\nYour choice: "))
-    if global_variables.is_test == 1:
+    game_setup.is_test = int(input("1. Test all levels\n2. Step by step demo\nYour choice: "))
+    if game_setup.is_test == 1:
         test()
-    elif global_variables.is_test == 2:
+    elif game_setup.is_test == 2:
 
-        global_variables.pygame_display = int(input("Show solution in pygame demo ?\nYes: 1\nNo: 2\nYour choice: "))
-        global_variables.is_bfs = int(input("Choose algorithm ?\nBFS: 1\nGenetic (Beta :v): 2\nYour choice: "))
+        game_setup.pygame_display = int(input("Show solution in pygame demo ?\nYes: 1\nNo: 2\nYour choice: "))
+        game_setup.is_bfs = int(input("Choose algorithm ?\nBFS: 1\nGenetic (Beta :v): 2\nYour choice: "))
 
         level = int(input("choose level (from 1-33)\nYour choice: "))
         path = './levels/lvl' + str(level) + '.txt'
-        global_variables.row, global_variables.col, global_variables.start_x, \
-            global_variables.start_y, game_map, global_variables.objects = read_file(path)
-        block = Block(global_variables.start_x, global_variables.start_y, "STAND", None, game_map)
+        game_setup.row, game_setup.col, game_setup.start_x, \
+            game_setup.start_y, game_map, game_setup.objects = read_file(path)
+        block = Block(game_setup.start_x, game_setup.start_y, "STAND", None, game_map)
 
         start_time = time.time()
         
-        if global_variables.is_bfs == 1:
+        if game_setup.is_bfs == 1:
             solution = BFS(block)
         else:
             print("Change variable in genetic_algorithm.py to have the best performance")
@@ -35,9 +35,9 @@ def main():
         
         if solution:
             #  draw solution
-            if global_variables.pygame_display == 1:
+            if game_setup.pygame_display == 1:
                 print("Level ", str(level), ":     Found solution in    ", round(time.time() - start_time, 9), ("s"))
-                draw_pygame(solution, global_variables.row, global_variables.col)
+                draw_pygame(solution, game_setup.row, game_setup.col)
 
             else:
                 draw_raw_solution(solution)

@@ -166,7 +166,7 @@ class Node:
 
 
 
-def solution_path(node):
+def get_solution(node):
     solution = [node.current]
     temp = node.parent
     while temp is not None:
@@ -186,7 +186,7 @@ def monte_carlo_tree_search(block):
         print(getFloor(node))
         if check_win(node.current):
             print(node.current.x, node.current.y)
-            return solution_path(node)
+            return get_solution(node)
         is_win = node.simulate()
         node.propagate(is_win)
         print(f'end iterator {iterator}')

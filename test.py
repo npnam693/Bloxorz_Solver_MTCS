@@ -1,4 +1,4 @@
-import global_variables
+import game_setup
 from read_level_input import read_file
 from block import Block
 from algorithm import BFS
@@ -9,10 +9,10 @@ def test():
     cnt_success = 0
     for level in range(1,34):
         path = './levels/lvl' + str(level) + '.txt'
-        global_variables.init()
-        global_variables.row, global_variables.col, global_variables.start_x, \
-            global_variables.start_y, game_map, global_variables.objects = read_file(path)
-        block = Block(global_variables.start_x, global_variables.start_y, "STAND", None, game_map)
+        game_setup.init()
+        game_setup.row, game_setup.col, game_setup.start_x, \
+            game_setup.start_y, game_map, game_setup.objects = read_file(path)
+        block = Block(game_setup.start_x, game_setup.start_y, "STAND", None, game_map)
         start_time = time.time()
         print("Testing level", level, " ..........")
         solution = BFS(block)

@@ -124,7 +124,7 @@ class Node:
             self.parent.propagate(is_win)
 
 
-def solution_path(node):
+def get_solution(node):
     solution = [node.block]
     temp = node.parent
     while temp is not None:
@@ -141,7 +141,7 @@ def monte_carlo_tree_search_new(block):
         node = root_node.select_child()
         if (node is None): continue
         if check_win(node.block):
-            return solution_path(node)
+            return get_solution(node)
         is_win = node.simulate()
         node.propagate(is_win)
         print(f'end iterator {iterator}')

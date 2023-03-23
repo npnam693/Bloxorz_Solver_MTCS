@@ -1,4 +1,4 @@
-import global_variables
+import game_setup
 
 
 class Block:
@@ -22,8 +22,8 @@ class Block:
         self.id = id
 
     def move_up(self):
-        global_variables.block_id += 1
-        new_block = Block(self.x, self.y, self.status, self, self.game_map, id=global_variables.block_id)
+        game_setup.block_id += 1
+        new_block = Block(self.x, self.y, self.status, self, self.game_map, id=game_setup.block_id)
         if self.status == "STAND":
             new_block.y -= 2
             new_block.status = "LIE_VERTICAL"
@@ -36,8 +36,8 @@ class Block:
         return new_block
 
     def move_right(self):
-        global_variables.block_id += 1
-        new_block = Block(self.x, self.y, self.status, self, self.game_map, id=global_variables.block_id)
+        game_setup.block_id += 1
+        new_block = Block(self.x, self.y, self.status, self, self.game_map, id=game_setup.block_id)
 
         if self.status == "STAND":
             new_block.x += 1
@@ -53,8 +53,8 @@ class Block:
         return new_block
 
     def move_left(self):
-        global_variables.block_id += 1
-        new_block = Block(self.x, self.y, self.status, self, self.game_map, id=global_variables.block_id)
+        game_setup.block_id += 1
+        new_block = Block(self.x, self.y, self.status, self, self.game_map, id=game_setup.block_id)
 
         if self.status == "STAND":
             new_block.x -= 2
@@ -70,8 +70,8 @@ class Block:
         return new_block
 
     def move_down(self):
-        global_variables.block_id += 1
-        new_block = Block(self.x, self.y, self.status, self, self.game_map, id=global_variables.block_id)
+        game_setup.block_id += 1
+        new_block = Block(self.x, self.y, self.status, self, self.game_map, id=game_setup.block_id)
 
         if self.status == "STAND":
             new_block.y += 1
@@ -87,65 +87,65 @@ class Block:
         return new_block
 
     def split_move_up(self):
-        global_variables.block_id += 1
+        game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
-                          self.x_split, self.y_split, id=global_variables.block_id)
+                          self.x_split, self.y_split, id=game_setup.block_id)
         new_block.y -= 1
         return new_block
 
     def split_move_right(self):
-        global_variables.block_id += 1
+        game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
-                          self.x_split, self.y_split, id=global_variables.block_id)
+                          self.x_split, self.y_split, id=game_setup.block_id)
         new_block.x += 1
 
         return new_block
 
     def split_move_left(self):
-        global_variables.block_id += 1
+        game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
-                          self.x_split, self.y_split, id=global_variables.block_id)
+                          self.x_split, self.y_split, id=game_setup.block_id)
         new_block.x -= 1
 
         return new_block
 
     def split_move_down(self):
-        global_variables.block_id += 1
+        game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
-                          self.x_split, self.y_split, id=global_variables.block_id)
+                          self.x_split, self.y_split, id=game_setup.block_id)
         new_block.y += 1
 
         return new_block
 
     # split other
     def split_move_up_other(self):
-        global_variables.block_id += 1
+        game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
-                          self.x_split, self.y_split, id=global_variables.block_id)
+                          self.x_split, self.y_split, id=game_setup.block_id)
         new_block.y_split -= 1
 
         return new_block
 
     def split_move_right_other(self):
-        global_variables.block_id += 1
+        game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
-                          self.x_split, self.y_split, id=global_variables.block_id)
+                          self.x_split, self.y_split, id=game_setup.block_id)
         new_block.x_split += 1
 
         return new_block
 
     def split_move_left_other(self):
-        global_variables.block_id += 1
+        game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
-                          self.x_split, self.y_split, id=global_variables.block_id)
+                          self.x_split, self.y_split, id=game_setup.block_id)
         new_block.x_split -= 1
 
         return new_block
 
     def split_move_down_other(self):
-        global_variables.block_id += 1
+        game_setup.block_id += 1
         new_block = Block(self.x, self.y, self.status, self, self.game_map,
-                          self.x_split, self.y_split, id=global_variables.block_id)
+                          self.x_split, self.y_split, id=game_setup.block_id)
         new_block.y_split += 1
 
         return new_block
