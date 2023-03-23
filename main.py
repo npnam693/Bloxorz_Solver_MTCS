@@ -7,6 +7,7 @@ from draw import draw_pygame, draw_raw_solution
 # from mcts import monte_carlo_tree_search
 from testMCTS import monte_carlo_tree_search_new
 import time
+import tracemalloc
 
 def main():
     game_setup.init()
@@ -26,6 +27,7 @@ def main():
         block = Block(game_setup.start_x, game_setup.start_y, "STAND", None, game_map)
 
         start_time = time.time()
+        tracemalloc.start()
         
         if game_setup.is_bfs == 1:
             solution = BFS(block)
@@ -33,10 +35,12 @@ def main():
             print("Change variable in genetic_algorithm.py to have the best performance")
             solution = monte_carlo_tree_search_new(block)
         
+        memory_used, peak_memory = tracemalloc.get_traced_memory()
         if solution:
             #  draw solution
             if game_setup.pygame_display == 1:
                 print("Level ", str(level), ":     Found solution in    ", round(time.time() - start_time, 9), ("s"))
+                print(f"Memory used: {memory_used} Bytes")
                 draw_pygame(solution, game_setup.row, game_setup.col)
 
             else:
@@ -45,6 +49,7 @@ def main():
 
         else:
             print("can not find solution :((((((")
+        tracemalloc.stop()
 
 
 if __name__ == "__main__":
