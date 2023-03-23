@@ -36,8 +36,6 @@ def init(row, col):
     pygame.init()
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Bloxorz Solver")
-    icon = pygame.image.load("resources/block.png")
-    pygame.display.set_icon(icon)
     # screen.fill(TILE_COLOR)
     return screen
 

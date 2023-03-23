@@ -31,7 +31,7 @@
     "point": [[3,7],[4,7]],
     "type": "close" }
 {   "switch": "sort_switch",
-    "position": [9,2],
+    "position": [9,3],
     "blocks_process": 2,
     "point": [[3,7],[4,7]],
     "type": "close" }

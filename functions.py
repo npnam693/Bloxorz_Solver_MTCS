@@ -94,14 +94,14 @@ def process_state(block):
                 sort_switch(block, x, y)
             # elif game_map[y][x-1] == 'o':
             #     sort_switch(block, x - 1, y)
-            elif game_map[y][x+1] == 'o':
+            if game_map[y][x+1] == 'o':
                 sort_switch(block, x + 1, y)
         if status == "LIE_VERTICAL":
             if game_map[y][x] == 'o':
                 sort_switch(block, x, y)
             # elif game_map[y-1][x] == 'o':
             #     sort_switch(block, x, y - 1)
-            elif game_map[y+1][x] == 'o':
+            if game_map[y+1][x] == 'o':
                 sort_switch(block, x, y + 1)
         if status == "SPLIT" and game_map[y][x] == 'o':
             sort_switch(block, x, y)
@@ -126,6 +126,7 @@ def process_state(block):
         return True
     else:
         return False
+
 
 
 def is_valid_move(block):

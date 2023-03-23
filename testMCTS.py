@@ -40,7 +40,6 @@ class Node:
         self.is_generate_children = False
         self.wins = 0
         self.games = 0
-
     def is_existed(self, block):
         curNode = self
         if curNode.block.status != "SPLIT":        
@@ -142,6 +141,6 @@ def monte_carlo_tree_search_new(block):
         if (node is None): continue
         if is_win(node.block):
             return get_solution(node)
-        is_win = node.simulate()
-        node.propagate(is_win)
+        resultSimulate = node.simulate()
+        node.propagate(resultSimulate)
         print(f'end iterator {iterator}')
