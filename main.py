@@ -1,11 +1,10 @@
 from block import Block
-from algorithm import BFS
+from BFS_algorithm import BFS
 from read_level_input import read_file
 import game_setup
 from test import test
 from draw import draw_pygame, draw_raw_solution
-# from mcts import monte_carlo_tree_search
-from testMCTS import monte_carlo_tree_search_new
+from MCTS_algorithm import monte_carlo_tree_search_new
 import time
 import tracemalloc
 
