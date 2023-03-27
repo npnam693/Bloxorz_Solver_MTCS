@@ -4,16 +4,17 @@ import sys
 from functions import convert_solution_map
 
 screen_scale = 50
-BLOCK_COLOR = (76,153,0)
-TILE_COLOR = (255,209,115)
+BLOCK_COLOR = '#b27466'
+TILE_COLOR = '#e0d9e0'
 TILE_FRAGILE = (255,153,51)
 BUTTON_SPLIT_COLOR = (178,255,102)
-EMPTY_SPACE = (40,40,40)
-EMPTY = (255,199,185)
+EMPTY_SPACE = '#FFFFFF'
+EMPTY = '#FFFFFF'
 UGLY_PINK = (255, 0, 255)
 BLACK = (0,0,0)
 PINK_FOR_CIRCLE = (191, 52, 194)
 GRAY = (33,33,33)
+WHITE = '#FFFFFF'
 
 def get_tile_color(tile_contents):
     tile_color = EMPTY
@@ -21,10 +22,11 @@ def get_tile_color(tile_contents):
         tile_color = EMPTY_SPACE
     if tile_contents == "#":
         tile_color = TILE_COLOR
+        
     if tile_contents == "=":
         tile_color = TILE_FRAGILE
     if tile_contents == "G":
-        tile_color = BLACK
+        tile_color = '#8798a5'
     if tile_contents == "+":
         tile_color = BLOCK_COLOR
     return tile_color
@@ -44,8 +46,8 @@ def draw_grid(row, col, screen):
     for i in range(col):
         new_height = round(i * screen_scale)
         new_width = round(i * screen_scale)
-        pygame.draw.line(screen, BLACK, (0, new_height), (col * screen_scale, new_height), 2)
-        pygame.draw.line(screen, BLACK, (new_width, 0), (new_width, row * screen_scale), 2)
+        pygame.draw.line(screen, WHITE, (0, new_height), (col * screen_scale, new_height), 2)
+        pygame.draw.line(screen, WHITE, (new_width, 0), (new_width, row * screen_scale), 2)
 
 
 def draw_map(screen, s):

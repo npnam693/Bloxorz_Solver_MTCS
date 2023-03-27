@@ -1,6 +1,5 @@
 import game_setup
 
-
 def action(queue, block):
     if process_state(block):
         if is_visited(block):
@@ -27,13 +26,22 @@ def sort_switch(block, x, y):
                 if obj["type"] == "toggle":
                     if game_map[bridge_y][bridge_x] == '.':
                         block.game_map[bridge_y][bridge_x] = '#'
+                        block.map = ''.join(''.join(l) for l in block.game_map)
                     else:
                         block.game_map[bridge_y][bridge_x] = '.'
+                        block.map = ''.join(''.join(l) for l in block.game_map)
+
+                        
                 elif obj["type"] == "open":
                     block.game_map[bridge_y][bridge_x] = '#'
+                    block.map = ''.join(''.join(l) for l in block.game_map)
+
+                    
 
                 elif obj["type"] == "close":
                     block.game_map[bridge_y][bridge_x] = '.'
+                    block.map = ''.join(''.join(l) for l in block.game_map)
+                    
                 else:
                     print("Error at func sort_switch")
 
@@ -52,13 +60,17 @@ def hard_switch(block, x, y):
                 if obj["type"] == "toggle":
                     if block.game_map[bridge_y][bridge_x] == '.':
                         block.game_map[bridge_y][bridge_x] = '#'
+                        block.map = ''.join(''.join(l) for l in block.game_map)
                     else:
                         block.game_map[bridge_y][bridge_x] = '.'
+                        block.map = ''.join(''.join(l) for l in block.game_map)
                 elif obj["type"] == "open":
                     block.game_map[bridge_y][bridge_x] = '#'
+                    block.map = ''.join(''.join(l) for l in block.game_map)
 
                 elif obj["type"] == "close":
                     block.game_map[bridge_y][bridge_x] = '.'
+                    block.map = ''.join(''.join(l) for l in block.game_map)
                 else:
                     print("Error at func hard_switch")
 

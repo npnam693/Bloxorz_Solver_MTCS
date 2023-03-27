@@ -1,9 +1,10 @@
 import game_setup
 from math import sqrt, inf
 from collections import namedtuple
-from heapq import heappush, heappop
-from functions import process_state, is_win, get_solution, is_visited
 from treenode import TreeNode
+from heapq import heappush, heappop
+from functions import process_state, is_win, get_solution,is_visited
+
 class Astar:
      def __init__(self):
           self.cost_visited=dict()
@@ -74,10 +75,10 @@ class Astar:
                     h_cost = self.min_h_cost(heuristic_costs, new_node)
                     new_node.f_cost = g_cost + h_cost
                     heappush(expanded_nodes, new_node)
-                    print((block.prev.x,block.prev.y,block.prev.status,block.prev.map))
-                    print((block.x,block.y,block.status,block.map))
-                    print(new_node.f_cost,g_cost,h_cost)
-                    print("")
+                    # print((block.prev.x,block.prev.y,block.prev.status,block.prev.map))
+                    # print((block.x,block.y,block.status,block.map))
+                    # print(new_node.f_cost,g_cost,h_cost)
+                    # print("")
                     game_setup.previous.append(new_node.block)
                     return True
                else:
@@ -122,12 +123,11 @@ class Astar:
                     self.add_move_astar(expanded_nodes, current.block.S1_move_down(), heuristic_costs)
                     self.add_move_astar(expanded_nodes, current.block.S1_move_left(), heuristic_costs)
                     
-                    self.add_move_astar(expanded_nodes, current.block.S2_move_up(), heuristic_costs)
-                    self.add_move_astar(expanded_nodes, current.block.S2_move_right(), heuristic_costs)
-                    self.add_move_astar(expanded_nodes, current.block.S2_move_down(), heuristic_costs)
-                    self.add_move_astar(expanded_nodes, current.block.S2_move_left(), heuristic_costs)
+                    self.add_move_astar(expanded_nodes, current.block.S2_move_up_other(), heuristic_costs)
+                    self.add_move_astar(expanded_nodes, current.block.S2_move_right_other(), heuristic_costs)
+                    self.add_move_astar(expanded_nodes, current.block.S2_move_down_other(), heuristic_costs)
+                    self.add_move_astar(expanded_nodes, current.block.S2_move_left_other(), heuristic_costs)
                current = heappop(expanded_nodes)
                # self.set_cost_visited((current.block.x,current.block.y,current.block.status), self.get_cost_visited((current.block.prev.x, current.block.prev.y,current.block.prev.status)) + 1)
                self.set_cost_visited((current.block.x,current.block.y,current.block.status,current.block.map), self.get_cost_visited((current.block.prev.x, current.block.prev.y,current.block.prev.status,current.block.prev.map)) + 1)
           return solution
-

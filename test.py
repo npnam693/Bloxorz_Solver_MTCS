@@ -1,5 +1,5 @@
 import game_setup
-from read_level_input import read_file
+from read_level_input import read_file, read_file_forAS
 from block import Block
 import time
 import tracemalloc
@@ -55,14 +55,14 @@ def testMCTS():
             print(f"Memory used: {memory_used} Bytes")
         else:
             print("Failed to find solution :( ")
-        print("===========================================")
+            print("==========================================================")
         tracemalloc.stop()
     print(cnt_success ,"/33 level success")
 
 def testAstart():
     cnt_success = 0
     for level in range(1,34):
-        if level in [8,9,10,15,16,20,22,28]: 
+        if level in [8,9,10,15,16,20,22,23,24,26, 28]: 
             print("Level ", str(level), ":    Time Limited")
             print("==========================================================")
 
@@ -70,8 +70,10 @@ def testAstart():
         path = './levels/lvl' + str(level) + '.txt'
         game_setup.init()
         game_setup.row, game_setup.col, game_setup.start_x, \
-            game_setup.start_y, game_map, game_setup.objects = read_file(path)
+            game_setup.start_y, game_map, game_setup.objects, \
+                game_setup.goal_x, game_setup.goal_y= read_file_forAS(path)
         block = Block(game_setup.start_x, game_setup.start_y, "STAND", None, game_map)
+        
         start_time = time.time()
         print("Testing level", level, " ..........")
         tracemalloc.start()
@@ -85,6 +87,6 @@ def testAstart():
             print(f"Memory used: {memory_used} Bytes")
         else:
             print("Failed to find solution :( ")
-        print("===========================================")
+            print("==========================================================")
         tracemalloc.stop()
     print(cnt_success ,"/33 level success")
