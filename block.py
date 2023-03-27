@@ -1,6 +1,4 @@
 import game_setup
-
-
 class Block:
     """
     x,y : position of the block

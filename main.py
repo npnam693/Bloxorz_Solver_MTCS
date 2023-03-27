@@ -2,54 +2,65 @@ from block import Block
 from BFS_algorithm import BFS
 from read_level_input import read_file
 import game_setup
-from test import test
+from test import testBFS, testMCTS, testAstart
 from draw import draw_pygame, draw_raw_solution
-from MCTS_algorithm import monte_carlo_tree_search_new
+from MCTS_algorithm import MCTS
+from Astart_algorithm import Astar
 import time
 import tracemalloc
 
 def main():
     game_setup.init()
+    
     print("\nChoose mode:")
-    game_setup.is_test = int(input("1. Test all levels\n2. Step by step demo\nYour choice: "))
-    if game_setup.is_test == 1:
-        test()
-    elif game_setup.is_test == 2:
-
+    game_setup.run_mode = int(input("1. Test all levels\n2. Step by step demo\nYour choice: "))
+    
+    if game_setup.run_mode == 1:
+        alogirthm = int(input("Choose algorithm ?\nBFS: 1\nMCTS: 2\nAstar: 3 \nYour choice: "))
+        if (alogirthm == 1): testBFS()
+        elif (alogirthm == 2): testAstart()
+        else : testMCTS()
+    
+    elif game_setup.run_mode == 2:
         game_setup.pygame_display = int(input("Show solution in pygame demo ?\nYes: 1\nNo: 2\nYour choice: "))
-        game_setup.is_bfs = int(input("Choose algorithm ?\nBFS: 1\nGenetic (Beta :v): 2\nYour choice: "))
-
+        
+        alogirthm = int(input("Choose algorithm ?\nBFS: 1\nMCTS: 2\nAstar: 3 \nYour choice: "))
+        
+        if alogirthm == 1: game_setup.is_bfs = 1 
+        
         level = int(input("choose level (from 1-33)\nYour choice: "))
         path = './levels/lvl' + str(level) + '.txt'
+        
         game_setup.row, game_setup.col, game_setup.start_x, \
-            game_setup.start_y, game_map, game_setup.objects = read_file(path)
+            game_setup.start_y, game_map, game_setup.objects, \
+                game_setup.goal_x, game_setup.goal_y= read_file(path)
+        
         block = Block(game_setup.start_x, game_setup.start_y, "STAND", None, game_map)
 
         start_time = time.time()
-        tracemalloc.start()
         
         if game_setup.is_bfs == 1:
             solution = BFS(block)
+        elif game_setup.is_bfs == 2:
+            solution = MCTS(block)
         else:
-            print("Change variable in genetic_algorithm.py to have the best performance")
-            solution = monte_carlo_tree_search_new(block)
+            a = Astar()
+            solution = a.solve_by_astar(block)
         
-        memory_used, peak_memory = tracemalloc.get_traced_memory()
         if solution:
             #  draw solution
             if game_setup.pygame_display == 1:
                 print("Level ", str(level), ":     Found solution in    ", round(time.time() - start_time, 9), ("s"))
-                print(f"Memory used: {memory_used} Bytes")
                 draw_pygame(solution, game_setup.row, game_setup.col)
-
             else:
                 draw_raw_solution(solution)
                 print("Level ", str(level), ":     Found solution in    ", round(time.time() - start_time, 9), ("s"))
 
         else:
             print("can not find solution :((((((")
-        tracemalloc.stop()
 
 
 if __name__ == "__main__":
     main()
+
+
