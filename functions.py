@@ -1,6 +1,5 @@
 import game_setup
 
-
 def action(queue, block):
     if process_state(block):
         if is_visited(block):
@@ -27,13 +26,22 @@ def sort_switch(block, x, y):
                 if obj["type"] == "toggle":
                     if game_map[bridge_y][bridge_x] == '.':
                         block.game_map[bridge_y][bridge_x] = '#'
+                        block.map = ''.join(''.join(l) for l in block.game_map)
                     else:
                         block.game_map[bridge_y][bridge_x] = '.'
+                        block.map = ''.join(''.join(l) for l in block.game_map)
+
+                        
                 elif obj["type"] == "open":
                     block.game_map[bridge_y][bridge_x] = '#'
+                    block.map = ''.join(''.join(l) for l in block.game_map)
+
+                    
 
                 elif obj["type"] == "close":
                     block.game_map[bridge_y][bridge_x] = '.'
+                    block.map = ''.join(''.join(l) for l in block.game_map)
+                    
                 else:
                     print("Error at func sort_switch")
 
@@ -52,13 +60,17 @@ def hard_switch(block, x, y):
                 if obj["type"] == "toggle":
                     if block.game_map[bridge_y][bridge_x] == '.':
                         block.game_map[bridge_y][bridge_x] = '#'
+                        block.map = ''.join(''.join(l) for l in block.game_map)
                     else:
                         block.game_map[bridge_y][bridge_x] = '.'
+                        block.map = ''.join(''.join(l) for l in block.game_map)
                 elif obj["type"] == "open":
                     block.game_map[bridge_y][bridge_x] = '#'
+                    block.map = ''.join(''.join(l) for l in block.game_map)
 
                 elif obj["type"] == "close":
                     block.game_map[bridge_y][bridge_x] = '.'
+                    block.map = ''.join(''.join(l) for l in block.game_map)
                 else:
                     print("Error at func hard_switch")
 
@@ -271,67 +283,3 @@ def convert_solution_map(solution):
         elif s.status == "SPLIT":
             s.game_map[s.y][s.x] = '+'
             s.game_map[s.y_split][s.x_split] = '+'
-
-
-def add_move_ga(valid_dna_s, cnt, block):
-    if process_state(block):
-        valid_dna_s.append(block)
-        cnt += 1
-    return cnt
-
-
-def add_move_fitness(block):
-    if process_state(block):
-        return True
-    return False
-
-
-# def check_win_dna(dna, block):
-#     game_setup.previous = []
-#     valid_dna_s = [block]
-#     cnt = 0
-#     for gene in dna.genes:
-#         if gene == dna.U:
-#             cnt = add_move_ga(valid_dna_s, cnt, valid_dna_s[cnt].move_up())
-#         elif gene == dna.R:
-#             cnt = add_move_ga(valid_dna_s, cnt, valid_dna_s[cnt].move_right())
-#         elif gene == dna.D:
-#             cnt = add_move_ga(valid_dna_s, cnt, valid_dna_s[cnt].move_down())
-#         else:
-#             cnt = add_move_ga(valid_dna_s, cnt, valid_dna_s[cnt].move_left())
-#     for valid_dna in valid_dna_s:
-#         if is_win(valid_dna):
-#             return True
-#     return False
-
-
-def ga_solution_reprocess(solution, block):
-    res = [block]
-    for direction in solution.genes:
-        if direction == "up":
-            block = block.move_up()
-            if add_move_fitness(block):
-                res.append(block)
-            else:
-                block = block.move_down()
-        elif direction == "right":
-            block = block.move_right()
-            if add_move_fitness(block):
-                res.append(block)
-            else:
-                block = block.move_left()
-        elif direction == "down":
-            block = block.move_down()
-            if add_move_fitness(block):
-                res.append(block)
-            else:
-                block = block.move_up()
-        else:
-            block = block.move_left()
-            if add_move_fitness(block):
-                res.append(block)
-            else:
-                block = block.move_right()
-        if is_win(block):
-            break
-    return res
