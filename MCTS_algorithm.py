@@ -1,6 +1,6 @@
 import math
 import random
-from functions import is_win, process_state, is_valid_move
+from utils import is_win, process_state, is_valid_move
 def check_existed_block(block, listBlock):
     if block.status != "SPLIT":
         for i in listBlock:

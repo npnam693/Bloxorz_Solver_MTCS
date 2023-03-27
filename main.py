@@ -1,6 +1,6 @@
 from block import Block
 from BFS_algorithm import BFS
-from read_level_input import read_file, read_file_forAS
+from read_level import read_file, read_file_forAS
 import game_setup
 from test import testBFS, testMCTS, testAstart
 from draw import draw_pygame, draw_raw_solution
@@ -14,7 +14,6 @@ def main():
     
     print("\nChoose mode:")
     game_setup.run_mode = int(input("1. Test all levels\n2. Step by step demo\nYour choice: "))
-    
     if game_setup.run_mode == 1:
         alogirthm = int(input("Choose algorithm ?\nBFS: 1\nMCTS: 2\nAstar: 3 \nYour choice: "))
         if (alogirthm == 1): testBFS()
@@ -51,7 +50,6 @@ def main():
                 print("Level ", str(level), ":    Time Limited")
                 time.sleep(30)
                 return 
-
 
             game_setup.row, game_setup.col, game_setup.start_x, \
             game_setup.start_y, game_map, game_setup.objects, \

@@ -1,7 +1,7 @@
-from functions import view_2d_solution
+from utils import view_2d_solution
 import pygame
 import sys
-from functions import convert_solution_map
+from utils import convert_solution_map
 
 screen_scale = 50
 BLOCK_COLOR = '#b27466'

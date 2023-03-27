@@ -25,11 +25,11 @@ class Block:
         new_block = Block(self.x, self.y, self.status, self, self.game_map, id=game_setup.block_id)
         if self.status == "STAND":
             new_block.y -= 2
-            new_block.status = "LIE_VERTICAL"
-        elif self.status == "LIE_VERTICAL":
+            new_block.status = "VERTICAL"
+        elif self.status == "VERTICAL":
             new_block.y -= 1
             new_block.status = "STAND"
-        elif self.status == "LIE_HORIZONTAL":
+        elif self.status == "HORIZONTAL":
             new_block.y -= 1
 
         return new_block
@@ -40,12 +40,12 @@ class Block:
 
         if self.status == "STAND":
             new_block.x += 1
-            new_block.status = "LIE_HORIZONTAL"
+            new_block.status = "HORIZONTAL"
 
-        if self.status == "LIE_VERTICAL":
+        if self.status == "VERTICAL":
             new_block.x += 1
 
-        if self.status == "LIE_HORIZONTAL":
+        if self.status == "HORIZONTAL":
             new_block.x += 2
             new_block.status = "STAND"
 
@@ -57,13 +57,13 @@ class Block:
 
         if self.status == "STAND":
             new_block.x -= 2
-            new_block.status = "LIE_HORIZONTAL"
+            new_block.status = "HORIZONTAL"
 
-        if self.status == "LIE_HORIZONTAL":
+        if self.status == "HORIZONTAL":
             new_block.x -= 1
             new_block.status = "STAND"
 
-        if self.status == "LIE_VERTICAL":
+        if self.status == "VERTICAL":
             new_block.x -= 1
 
         return new_block
@@ -74,13 +74,13 @@ class Block:
 
         if self.status == "STAND":
             new_block.y += 1
-            new_block.status = "LIE_VERTICAL"
+            new_block.status = "VERTICAL"
 
-        if self.status == "LIE_VERTICAL":
+        if self.status == "VERTICAL":
             new_block.y += 2
             new_block.status = "STAND"
 
-        if self.status == "LIE_HORIZONTAL":
+        if self.status == "HORIZONTAL":
             new_block.y += 1
 
         return new_block
@@ -167,8 +167,8 @@ class Block:
                 print("", end='  ')
                 for j in range(len(game_map[i])):
                     if (i == y and j == x and status == "STAND") \
-                            or ((i == y and j == x) or (i == y and j == x + 1) and status == "LIE_HORIZONTAL") \
-                            or ((i == y and j == x) or (i == y + 1 and j == x) and status == "LIE_VERTICAL"):
+                            or ((i == y and j == x) or (i == y and j == x + 1) and status == "HORIZONTAL") \
+                            or ((i == y and j == x) or (i == y + 1 and j == x) and status == "VERTICAL"):
 
                         print("+", end=' ')
 

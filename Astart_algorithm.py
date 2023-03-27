@@ -3,7 +3,7 @@ from math import sqrt, inf
 from collections import namedtuple
 from treenode import TreeNode
 from heapq import heappush, heappop
-from functions import process_state, is_win, get_solution,is_visited
+from utils import process_state, is_win, get_solution,is_visited
 
 class Astar:
      def __init__(self):
@@ -34,7 +34,7 @@ class Astar:
                # print("Hcost: ", value)
                return value
 
-          if node.block.status  == "LIE_VERTICAL":
+          if node.block.status  == "VERTICAL":
                index1 = node.block.y * game_setup.col + node.block.x
                index2 = (node.block.y + 1) * game_setup.col + node.block.x
                value=min(h_costs[index1], h_costs[index2])
@@ -42,7 +42,7 @@ class Astar:
                # print("Hcost: ", value)
                return value
 
-          if node.block.status  == "LIE_HORIZONTAL":
+          if node.block.status  == "HORIZONTAL":
                index1 = node.block.y * game_setup.col + node.block.x
                index2 = node.block.y * game_setup.col + (node.block.x + 1)
                value=min(h_costs[index1], h_costs[index2])

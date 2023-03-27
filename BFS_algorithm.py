@@ -1,5 +1,5 @@
 import game_setup
-from functions import is_win, action, get_solution
+from utils import is_win, action, get_solution
 
 def BFS(block):
     game_setup.previous = [block]  
@@ -7,7 +7,6 @@ def BFS(block):
     solution = []
     while queue:
         currentState = queue.pop(0)
-
         if is_win(currentState):
             print("Success! Found solution after", currentState.id, "steps:")
             solution = get_solution(currentState)

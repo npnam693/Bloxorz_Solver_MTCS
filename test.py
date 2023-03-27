@@ -1,5 +1,5 @@
 import game_setup
-from read_level_input import read_file, read_file_forAS
+from read_level import read_file, read_file_forAS
 from block import Block
 import time
 import tracemalloc
