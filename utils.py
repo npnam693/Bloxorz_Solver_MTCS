@@ -104,15 +104,11 @@ def process_state(block):
         if status == "HORIZONTAL":
             if game_map[y][x] == 'o':
                 sort_switch(block, x, y)
-            # elif game_map[y][x-1] == 'o':
-            #     sort_switch(block, x - 1, y)
             if game_map[y][x+1] == 'o':
                 sort_switch(block, x + 1, y)
         if status == "VERTICAL":
             if game_map[y][x] == 'o':
                 sort_switch(block, x, y)
-            # elif game_map[y-1][x] == 'o':
-            #     sort_switch(block, x, y - 1)
             if game_map[y+1][x] == 'o':
                 sort_switch(block, x, y + 1)
         if status == "SPLIT" and game_map[y][x] == 'o':

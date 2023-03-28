@@ -1,14 +1,5 @@
 import game_setup
 class Block:
-    """
-    x,y : position of the block
-    status: standing or lying
-    prev: save previous block
-    game_map: save map of the current level
-    x_split, y_split: save position of the splited part
-    id: save id for debugging
-    """
-
     def __init__(self, x, y, status, prev, game_map, x_split=None, y_split=None, id=0, map=""):
         self.x = x
         self.y = y
